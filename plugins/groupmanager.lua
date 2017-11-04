@@ -1698,25 +1698,25 @@ local lang = redis:get(hash)
 local data = load_data(_config.moderation.data)
 local target = msg.to.id
 ----------------Begin Msg Matches--------------
-if matches[1] == "gadd" and is_admin(msg) then
+if matches[1] == "اضافه" and is_admin(msg) then
 return modadd(msg)
    end
-if matches[1] == "grem" and is_admin(msg) then
+if matches[1] == "حذف" and is_admin(msg) then
 return modrem(msg)
    end
-if matches[1] == "ownerlist" and is_mod(msg) then
+if matches[1] == "لیست مالکان" and is_mod(msg) then
 return ownerlist(msg)
    end
-if matches[1] == "filterlist" and is_mod(msg) then
+if matches[1] == "لیست فیلتر" and is_mod(msg) then
 return filter_list(msg)
    end
-if matches[1] == "modlist" and is_mod(msg) then
+if matches[1] == "لیست مدیران" and is_mod(msg) then
 return modlist(msg)
    end
-if matches[1] == "whitelist" and is_mod(msg) then
+if matches[1] == "لیست سفید" and is_mod(msg) then
 return whitelist(msg.to.id)
    end
-if matches[1] == "whois" and matches[2] and (matches[2]:match('^%d+') or matches[2]:match('-%d+')) and is_mod(msg) then
+if matches[1] == "چه کسی" and matches[2] and (matches[2]:match('^%d+') or matches[2]:match('-%d+')) and is_mod(msg) then
 		local usr_name, fst_name, lst_name, biotxt, text = '', '', '', '', ''
 		local user = getUser(matches[2])
 		if not user.result then
@@ -1799,10 +1799,10 @@ if matches[1] == "res" and matches[2] and not matches[2]:match('^%d+') and is_mo
 		end
 		return text
 end
-if matches[1] == 'beyond' then
+if matches[1] == 'نایس' then
 return _config.info_text
 end
-if matches[1] == "id" then
+if matches[1] == "ایدی" then
    if not matches[2] and not msg.reply_to_message then
 local status = getUserProfilePhotos(msg.from.id, 0, 0)
    if status.result.total_count ~= 0 then
@@ -1834,7 +1834,7 @@ local status = getUserProfilePhotos(msg.from.id, 0, 0)
      return "`"..msg.reply.fwd_from.id.."`"
    end
 end
-if matches[1] == "pin" and is_mod(msg) and msg.reply_id then
+if matches[1] == "سنجاق" and is_mod(msg) and msg.reply_id then
 local lock_pin = data[tostring(msg.to.id)]["settings"]["lock_pin"] 
  if lock_pin == 'yes' then
 if is_owner(msg) then
@@ -1860,7 +1860,7 @@ return "*Message Has Been Pinned*"
 end
 end
 end
-if matches[1] == 'unpin' and is_mod(msg) then
+if matches[1] == 'حذف سنجاق' and is_mod(msg) then
 local lock_pin = data[tostring(msg.to.id)]["settings"]["lock_pin"] 
  if lock_pin == 'yes' then
 if is_owner(msg) then
@@ -1882,13 +1882,13 @@ return "*Message Has Been UnPinned*"
 end
 end
 end
-if matches[1] == 'mutelist' then
+if matches[1] == 'لیست بیصدا' then
 return mutes(msg, target)
 end
-if matches[1] == 'settings' then
+if matches[1] == 'تنظیمات' then
 return group_settings(msg, target)
 end
-   if matches[1] == "setowner" and is_admin(msg) then
+   if matches[1] == "تنظیم مالک" and is_admin(msg) then
    if not matches[2] and msg.reply_to_message then
 	if msg.reply.username then
 	username = "@"..check_markdown(msg.reply.username)
@@ -1963,7 +1963,7 @@ end
    end
 end
 end
-   if matches[1] == "remowner" and is_admin(msg) then
+   if matches[1] == "عزل مالک" and is_admin(msg) then
       if not matches[2] and msg.reply_to_message then
 	if msg.reply.username then
 	username = "@"..check_markdown(msg.reply.username)
@@ -2038,7 +2038,7 @@ end
       end
 end
 end
-   if matches[1] == "promote" and is_owner(msg) then
+   if matches[1] == "تنظیم مدیر" and is_owner(msg) then
    if not matches[2] and msg.reply_to_message then
 	if msg.reply.username then
 	username = "@"..check_markdown(msg.reply.username)
@@ -2113,7 +2113,7 @@ end
    end
 end
 end
-   if matches[1] == "demote" and is_owner(msg) then
+   if matches[1] == "عزل مدیر" and is_owner(msg) then
       if not matches[2] and msg.reply_to_message then
 	if msg.reply.username then
 	username = "@"..check_markdown(msg.reply.username)
@@ -2188,7 +2188,7 @@ end
       end
 end
 end
-   if matches[1] == "whitelist" and matches[2] == "+" and is_mod(msg) then
+   if matches[1] == "لیست سفید" and matches[2] == "+" and is_mod(msg) then
    if not matches[3] and msg.reply_to_message then
 	if msg.reply.username then
 	username = "@"..check_markdown(msg.reply.username)
@@ -2259,7 +2259,7 @@ end
    end
 end
 end
-   if matches[1] == "whitelist" and matches[2] == "-" and is_mod(msg) then
+   if matches[1] == "لیست سفید" and matches[2] == "-" and is_mod(msg) then
       if not matches[3] and msg.reply_to_message then
 	if msg.reply.username then
 	username = "@"..check_markdown(msg.reply.username)
@@ -2334,171 +2334,171 @@ end
       end
 end
 end
-if matches[1]:lower() == "lock" and is_mod(msg) then
-if matches[2] == "link" then
+if matches[1]:lower() == "قفل" and is_mod(msg) then
+if matches[2] == "لینک" then
 return lock_link(msg, data, target)
 end
-if matches[2] == "tag" then
+if matches[2] == "تگ" then
 return lock_tag(msg, data, target)
 end
-if matches[2] == "mention" then
+if matches[2] == "منشن" then
 return lock_mention(msg, data, target)
 end
-if matches[2] == "arabic" then
+if matches[2] == "عربی" then
 return lock_arabic(msg, data, target)
 end
-if matches[2] == "edit" then
+if matches[2] == "ویرایش" then
 return lock_edit(msg, data, target)
 end
-if matches[2] == "spam" then
+if matches[2] == "اسپم" then
 return lock_spam(msg, data, target)
 end
-if matches[2] == "flood" then
+if matches[2] == "فلود" then
 return lock_flood(msg, data, target)
 end
-if matches[2] == "bots" then
+if matches[2] == "بوت" then
 return lock_bots(msg, data, target)
 end
-if matches[2] == "markdown" then
+if matches[2] == "مارکداون" then
 return lock_markdown(msg, data, target)
 end
-if matches[2] == "webpage" then
+if matches[2] == "صفحه وب" then
 return lock_webpage(msg, data, target)
 end
-if matches[2] == "pin" and is_owner(msg) then
+if matches[2] == "سنجاق" and is_owner(msg) then
 return lock_pin(msg, data, target)
 end
-if matches[2] == "join" then
+if matches[2] == "جوین" then
 return lock_join(msg, data, target)
 end
 end
-if matches[1]:lower() == "unlock" and is_mod(msg) then
-if matches[2] == "link" then
+if matches[1]:lower() == "بازکردن" and is_mod(msg) then
+if matches[2] == "لینک" then
 return unlock_link(msg, data, target)
 end
-if matches[2] == "tag" then
+if matches[2] == "تگ" then
 return unlock_tag(msg, data, target)
 end
-if matches[2] == "mention" then
+if matches[2] == "منشن" then
 return unlock_mention(msg, data, target)
 end
-if matches[2] == "arabic" then
+if matches[2] == "عربی" then
 return unlock_arabic(msg, data, target)
 end
-if matches[2] == "edit" then
+if matches[2] == "ویرایش" then
 return unlock_edit(msg, data, target)
 end
-if matches[2] == "spam" then
+if matches[2] == "اسپم" then
 return unlock_spam(msg, data, target)
 end
-if matches[2] == "flood" then
+if matches[2] == "فلود" then
 return unlock_flood(msg, data, target)
 end
-if matches[2] == "bots" then
+if matches[2] == "بوت" then
 return unlock_bots(msg, data, target)
 end
-if matches[2] == "markdown" then
+if matches[2] == "مارکداون" then
 return unlock_markdown(msg, data, target)
 end
-if matches[2] == "webpage" then
+if matches[2] == "صفحه وب" then
 return unlock_webpage(msg, data, target)
 end
-if matches[2] == "pin" and is_owner(msg) then
+if matches[2] == "سنجاق" and is_owner(msg) then
 return unlock_pin(msg, data, target)
 end
-if matches[2] == "join" then
+if matches[2] == "جوین" then
 return unlock_join(msg, data, target)
 end
 end
-if matches[1]:lower() == "mute" and is_mod(msg) then
-if matches[2] == "gif" then
+if matches[1]:lower() == "بیصدا" and is_mod(msg) then
+if matches[2] == "گیف" then
 return mute_gif(msg, data, target)
 end
-if matches[2] == "text" then
+if matches[2] == "متن" then
 return mute_text(msg ,data, target)
 end
-if matches[2] == "photo" then
+if matches[2] == "عکس" then
 return mute_photo(msg ,data, target)
 end
-if matches[2] == "video" then
+if matches[2] == "فیلم" then
 return mute_video(msg ,data, target)
 end
-if matches[2] == "audio" then
+if matches[2] == "موزیک" then
 return mute_audio(msg ,data, target)
 end
-if matches[2] == "voice" then
+if matches[2] == "ویس" then
 return mute_voice(msg ,data, target)
 end
-if matches[2] == "sticker" then
+if matches[2] == "استیکر" then
 return mute_sticker(msg ,data, target)
 end
-if matches[2] == "contact" then
+if matches[2] == "شماره" then
 return mute_contact(msg ,data, target)
 end
-if matches[2] == "forward" then
+if matches[2] == "فوروارد" then
 return mute_forward(msg ,data, target)
 end
-if matches[2] == "location" then
+if matches[2] == "مکان" then
 return mute_location(msg ,data, target)
 end
-if matches[2] == "document" then
+if matches[2] == "فایل" then
 return mute_document(msg ,data, target)
 end
-if matches[2] == "tgservice" then
+if matches[2] == "تلگرام سرویس" then
 return mute_tgservice(msg ,data, target)
 end
-if matches[2] == 'all' then
+if matches[2] == 'همه' then
 return mute_all(msg ,data, target)
 end
 end
-if matches[1]:lower() == "unmute" and is_mod(msg) then
-if matches[2] == "gif" then
+if matches[1]:lower() == "باصدا" and is_mod(msg) then
+if matches[2] == "گیف" then
 return unmute_gif(msg, data, target)
 end
-if matches[2] == "text" then
+if matches[2] == "متن" then
 return unmute_text(msg, data, target)
 end
-if matches[2] == "photo" then
+if matches[2] == "عکس" then
 return unmute_photo(msg ,data, target)
 end
-if matches[2] == "video" then
+if matches[2] == "فیلم" then
 return unmute_video(msg ,data, target)
 end
-if matches[2] == "audio" then
+if matches[2] == "موزیک" then
 return unmute_audio(msg ,data, target)
 end
-if matches[2] == "voice" then
+if matches[2] == "ویس" then
 return unmute_voice(msg ,data, target)
 end
-if matches[2] == "sticker" then
+if matches[2] == "استیکر" then
 return unmute_sticker(msg ,data, target)
 end
-if matches[2] == "contact" then
+if matches[2] == "شماره" then
 return unmute_contact(msg ,data, target)
 end
-if matches[2] == "forward" then
+if matches[2] == "فوروارد" then
 return unmute_forward(msg ,data, target)
 end
-if matches[2] == "location" then
+if matches[2] == "مکان" then
 return unmute_location(msg ,data, target)
 end
-if matches[2] == "document" then
+if matches[2] == "فایل" then
 return unmute_document(msg ,data, target)
 end
-if matches[2] == "tgservice" then
+if matches[2] == "تلگرام سرویس" then
 return unmute_tgservice(msg ,data, target)
 end
- if matches[2] == 'all' then
+ if matches[2] == 'همه' then
 return unmute_all(msg ,data, target)
 end
 end
-  if matches[1] == 'filter' and matches[2] and is_mod(msg) then
+  if matches[1] == 'فیلتر' and matches[2] and is_mod(msg) then
     return filter_word(msg, matches[2])
   end
-  if matches[1] == 'unfilter' and matches[2] and is_mod(msg) then
+  if matches[1] == 'حذف فیلتر' and matches[2] and is_mod(msg) then
     return unfilter_word(msg, matches[2])
   end
-  if matches[1] == 'newlink' and is_mod(msg) then
+  if matches[1] == 'لینک جدید' and is_mod(msg) then
   local administration = load_data(_config.moderation.data)
   local link = exportChatInviteLink(msg.to.id)
 	if not link then
@@ -2517,7 +2517,7 @@ end
 		end
 	end
    end
-		if matches[1] == 'setlink' and is_owner(msg) then
+		if matches[1] == 'تنظیم لینک' and is_owner(msg) then
 		data[tostring(target)]['settings']['linkgp'] = 'waiting'
 			save_data(_config.moderation.data, data)
 			if lang then
@@ -2538,7 +2538,7 @@ end
 				end
        end
 		end
-    if matches[1] == 'link' and is_mod(msg) then
+    if matches[1] == 'لینک' and is_mod(msg) then
       local linkgp = data[tostring(target)]['settings']['linkgp']
       if not linkgp then
 	  if lang then
@@ -2554,7 +2554,7 @@ end
 	   end
         return text
      end
-    if matches[1] == 'linkpv' and is_mod(msg) then
+    if matches[1] == 'لینک پیوی' and is_mod(msg) then
       local linkgp = data[tostring(target)]['settings']['linkgp']
       if not linkgp then
         if lang then
@@ -2575,7 +2575,7 @@ end
         return "*Group link* _was send in your_ *private chat*"
 		end
      end
-  if matches[1] == "setrules" and matches[2] and is_mod(msg) then
+  if matches[1] == "تنظیم قوانین" and matches[2] and is_mod(msg) then
     data[tostring(target)]['rules'] = matches[2]
 	  save_data(_config.moderation.data, data)
 	  if lang then
@@ -2584,7 +2584,7 @@ end
     return "*Group rules* _has been set_"
 	end
   end
-  if matches[1] == "rules" then
+  if matches[1] == "قوانین" then
  if not data[tostring(target)]['rules'] then
 if not lang then
      rules = "ℹ️ The Default Rules :\n1⃣ No Flood.\n2⃣ No Spam.\n3⃣ No Advertising.\n4⃣ Try to stay on topic.\n5⃣ Forbidden any racist, sexual, homophobic or gore content.\n➡️ Repeated failure to comply with these rules will cause ban."
@@ -2600,7 +2600,7 @@ if not lang then
       end
     return rules
   end
-		if matches[1]:lower() == 'setchar' then
+		if matches[1]:lower() == 'تعداد کاراکتر' then
 			if not is_mod(msg) then
 				return
 			end
@@ -2613,7 +2613,7 @@ if not lang then
      return "_حداکثر حروف مجاز در پیام تنظیم شد به :_ *[ "..matches[2].." ]*"
 		end
   end
-  if matches[1]:lower() == 'setflood' and is_mod(msg) then
+  if matches[1]:lower() == 'تعداد فلود' and is_mod(msg) then
 			if tonumber(matches[2]) < 1 or tonumber(matches[2]) > 50 then
 			if not lang then
 				return "_Wrong number, range is_ *[2-50]*"
@@ -2630,7 +2630,7 @@ if not lang then
     return '_محدودیت پیام مکرر به_ *'..tonumber(matches[2])..'* _تنظیم شد._'
     end
        end
-  if matches[1]:lower() == 'setfloodtime' and is_mod(msg) then
+  if matches[1]:lower() == 'زمان فلود' and is_mod(msg) then
 			if tonumber(matches[2]) < 1 or tonumber(matches[2]) > 10 then
 				if not lang then
 				return "_Wrong number, range is_ *[2-50]*"
@@ -2643,8 +2643,8 @@ if not lang then
 			save_data(_config.moderation.data, data)
     return "_Group_ *flood* _check time has been set to :_ *[ "..matches[2].." ]*"
        end
-		if matches[1]:lower() == 'clean' and is_owner(msg) then
-			if matches[2] == 'mods' then
+		if matches[1]:lower() == 'حذف' and is_owner(msg) then
+			if matches[2] == 'مدیران' then
 				if next(data[tostring(msg.to.id)]['mods']) == nil then
 					if not lang then
 					return "_No_ *moderators* _in this group_"
@@ -2662,7 +2662,7 @@ if not lang then
             return "تمام مدیران گروه تنزیل مقام شدند"
 			end
          end
-			if matches[2] == 'filterlist' then
+			if matches[2] == 'لیست فیلتر' then
 				if next(data[tostring(msg.to.id)]['filterlist']) == nil then
 					if not lang then
 					return "*Filtered words list* _is empty_"
@@ -2680,7 +2680,7 @@ if not lang then
 				return "_لیست کلمات فیلتر شده پاک شد_"
            end
 			end
-			if matches[2] == 'rules' then
+			if matches[2] == 'قوانین' then
 				if not data[tostring(msg.to.id)]['rules'] then
 					if not lang then
 					return "_No_ *rules* _available_"
@@ -2696,7 +2696,7 @@ if not lang then
             return "قوانین گروه پاک شد"
 			end
        end
-			if matches[2] == 'welcome' then
+			if matches[2] == 'خوشامد' then
 				if not data[tostring(msg.to.id)]['setwelcome'] then
 					if not lang then
 					return "*Welcome Message not set*"
@@ -2712,7 +2712,7 @@ if not lang then
             return "پیام خوشآمد گویی پاک شد"
 			end
        end
-			if matches[2] == 'about' then
+			if matches[2] == 'درباره' then
         if msg.to.type == "group" then
 				if not data[tostring(msg.to.id)]['about'] then
 					if not lang then
@@ -2733,8 +2733,8 @@ if not lang then
              end
 		   	end
         end
-		if matches[1]:lower() == 'clean' and is_admin(msg) then
-			if matches[2] == 'owners' then
+		if matches[1]:lower() == 'حذف' and is_admin(msg) then
+			if matches[2] == 'مالکان' then
 				if next(data[tostring(msg.to.id)]['owners']) == nil then
 					if not lang then
 					return "_No_ *owners* _in this group_"
@@ -2753,11 +2753,11 @@ if not lang then
           end
 			end
      end
-if matches[1] == "setname" and matches[2] and is_mod(msg) then
+if matches[1] == "تنظیم نام" and matches[2] and is_mod(msg) then
 local gp_name = matches[2]
 setChatTitle(msg.to.id, gp_name)
 end
-if matches[1] == 'setphoto' and is_mod(msg) then
+if matches[1] == 'تنظیم عکس' and is_mod(msg) then
 gpPhotoFile = "./data/photos/group_photo_"..msg.to.id..".jpg"
      if not msg.caption and not msg.reply_to_message then
 			data[tostring(msg.to.id)]['settings']['set_photo'] = 'waiting'
@@ -2805,7 +2805,7 @@ setChatPhoto(msg.to.id, gpPhotoFile)
   return "*Photo Saved*"
 		end
   end
-if matches[1] == "delphoto" and is_mod(msg) then
+if matches[1] == "حذف عکس" and is_mod(msg) then
 deleteChatPhoto(msg.to.id)
 if not lang then
   return "*Group Photo* _has been_ *removed*"
@@ -2813,7 +2813,7 @@ if not lang then
   return '_عکس پروفایل گروه حذف شد_'
   end
 end
-  if matches[1] == "setabout" and matches[2] and is_mod(msg) then
+  if matches[1] == "تنظیم درباره" and matches[2] and is_mod(msg) then
      if msg.to.type == "supergroup" then
    setChatDescription(msg.to.id, matches[2])
     elseif msg.to.type == "group" then
@@ -2826,7 +2826,7 @@ end
      return "پیام مبنی بر درباره گروه ثبت شد"
       end
   end
-  if matches[1] == "about" and msg.to.type == "group" then
+  if matches[1] == "درباره" and msg.to.type == "group" then
  if not data[tostring(msg.to.id)]['about'] then
      if not lang then
      about = "_No_ *description* _available_"
@@ -2842,11 +2842,11 @@ end
       end
     return about
   end
-if matches[1] == "del" and is_mod(msg) then
+if matches[1] == "حذف" and is_mod(msg) then
 del_msg(msg.to.id, msg.reply_id)
 del_msg(msg.to.id, msg.id)
    end
-if matches[1] == "config" and is_owner(msg) then
+if matches[1] == "کانفیگ" and is_owner(msg) then
 local status = getChatAdministrators(msg.to.id).result
 for k,v in pairs(status) do
 if v.status == "administrator" then
@@ -2866,7 +2866,7 @@ user_name = escape_markdown(v.user.first_name)
 	return '_تمامی ادمین های گزوه به مدیر ربات ارتقا داده شدند_'
 	end
 end
-if matches[1] == 'rmsg' and matches[2] and is_owner(msg) then
+if matches[1] == 'پاک' and matches[2] and is_owner(msg) then
 local num = matches[2]
 if 100 < tonumber(num) then
 if not lang then
@@ -2880,8 +2880,8 @@ del_msg(msg.to.id,msg.id - i)
 end
 end
 --------------------- Welcome -----------------------
-	if matches[1] == "welcome" and is_mod(msg) then
-		if matches[2] == "enable" then
+	if matches[1] == "خوشامد" and is_mod(msg) then
+		if matches[2] == "روشن" then
 			welcome = data[tostring(msg.to.id)]['settings']['welcome']
 			if welcome == "yes" then
 				if not lang then
@@ -2900,7 +2900,7 @@ end
 			end
 		end
 		
-		if matches[2] == "disable" then
+		if matches[2] == "خاموش" then
 			welcome = data[tostring(msg.to.id)]['settings']['welcome']
 			if welcome == "no" then
 				if not lang then
@@ -2919,7 +2919,7 @@ end
 			end
 		end
 	end
-	if matches[1] == "setwelcome" and matches[2] and is_mod(msg) then
+	if matches[1] == "تنظیم خوشامد" and matches[2] and is_mod(msg) then
 		data[tostring(msg.to.id)]['setwelcome'] = matches[2]
 	    save_data(_config.moderation.data, data)
 		if not lang then
@@ -2929,19 +2929,19 @@ end
         end
 		end
 -------------SetLang-------
-if matches[1] == "setlang" and is_owner(msg) then
+if matches[1] == "تنظیم زبان" and is_owner(msg) then
 local hash = "group_lang:"..msg.to.id
-   if matches[2] == "en" then
+   if matches[2] == "انگلیسی" then
 local hash = "group_lang:"..msg.to.id
  redis:del(hash)
   return "_Group Language Set To:_ *EN*"
-  elseif matches[2] == "fa" then
+  elseif matches[2] == "فارسی" then
 redis:set(hash, true)
   return "_زبان گروه تنظیم شد به : فارسی_"
    end
 end
 -------------Help-------------
-  if matches[1] == "help" and is_mod(msg) then
+  if matches[1] == "راهنما" and is_mod(msg) then
     local text = [[
 *Beyond Bot Commands:*
 
